@@ -30,7 +30,7 @@
   <div class="mb-3" id="start-control">
     @if (isActive()) {
       <button class="form-control btn btn-secondary" type="button" id="stop" (click)="onStop()">
-        Stop
+        Leave
       </button>
     } @else {
       <button
@@ -40,7 +40,7 @@
         [disabled]="!canStart()"
         (click)="onStart()"
       >
-        Start
+        Enter
       </button>
     }
   </div>
@@ -51,10 +51,15 @@
 
       <div class="mb-3">
         <label for="exampleFormControlTextarea1" class="form-label">Messages</label>
-        <div class="form-control overflow-auto" style="height: 250px" id="history">
-          <pre
-            >{{ history() }}
-          </pre>
+        <div #history class="form-control overflow-auto" style="height: 250px" id="history">
+          @for (chatMessage of chatMessages(); track $index) {
+            <div
+              [class.sender]="chatMessage.sender === name()"
+              [style.color]="color(chatMessage.sender ?? 'default')"
+            >
+              <b>{{ chatMessage.sender }}</b> : {{ chatMessage.message }}
+            </div>
+          }
         </div>
       </div>
 
