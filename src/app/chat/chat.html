@@ -1,0 +1,83 @@
+<form #chatForm="ngForm" (ngSubmit)="onSend()">
+  <!-- Name Field -->
+  <div class="input-group mb-3">
+    <label for="name" class="input-group-text">Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="name"
+      name="name"
+      required
+      [disabled]="isActive()"
+      [(ngModel)]="name"
+    />
+  </div>
+
+  <!-- Room Field -->
+  <div class="input-group mb-3">
+    <label for="room" class="input-group-text">Room</label>
+    <input
+      type="text"
+      class="form-control"
+      id="room"
+      name="room"
+      required
+      [disabled]="isActive()"
+      [(ngModel)]="room"
+    />
+  </div>
+
+  <div class="mb-3" id="start-control">
+    @if (isActive()) {
+      <button class="form-control btn btn-secondary" type="button" id="stop" (click)="onStop()">
+        Stop
+      </button>
+    } @else {
+      <button
+        class="form-control btn btn-secondary"
+        type="button"
+        id="start"
+        [disabled]="!canStart()"
+        (click)="onStart()"
+      >
+        Start
+      </button>
+    }
+  </div>
+
+  @if (isActive()) {
+    <div id="chat-div">
+      <!-- All chat messages will be appended here -->
+
+      <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Messages</label>
+        <div class="form-control overflow-auto" style="height: 250px" id="history">
+          <pre
+            >{{ history() }}
+          </pre>
+        </div>
+      </div>
+
+      <!-- Type your messages to be sent -->
+      <div class="input-group mb-3">
+        <label for="message" class="input-group-text" hidden>Message</label>
+        <input
+          type="text"
+          class="form-control"
+          id="message"
+          name="message"
+          required
+          [(ngModel)]="message"
+        />
+        <button
+          class="btn btn-secondary"
+          type="submit"
+          id="send"
+          [disabled]="chatForm.form.invalid"
+        >
+          Send
+        </button>
+      </div>
+    </div>
+  }
+</form>
