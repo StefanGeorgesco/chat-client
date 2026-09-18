@@ -1,3 +1,8 @@
+@if (showHomeLink()) {
+  <div class="sticky-top">
+    <a routerLink="/home" class="btn btn-success m-3">Home</a>
+  </div>
+}
 <div class="container mt-5">
   <router-outlet />
 </div>
