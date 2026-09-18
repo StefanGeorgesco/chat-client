@@ -1,3 +1,4 @@
 export const environment = {
-  apiUri: `ws://${window.location.hostname}:${window.location.port}/chat`,
+  wsUri: `ws://${window.location.hostname}:${window.location.port}/chat`,
+  geoApiUrl: `http://${window.location.hostname}:${window.location.port}/geo`,
 };

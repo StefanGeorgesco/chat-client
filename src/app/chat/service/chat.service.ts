@@ -6,13 +6,13 @@ import { environment } from '../../../environments/environment';
 
 @Service()
 export class ChatService {
-  private readonly appUri = environment.apiUri;
+  private readonly wsUri = environment.wsUri;
   private _messageStream$!: Subject<ChatMessage>;
   private webSocket?: WebSocket;
 
   connect(room: string) {
     this._messageStream$ = new Subject<ChatMessage>();
-    this.webSocket = new WebSocket(`${this.appUri}?room=${room}`);
+    this.webSocket = new WebSocket(`${this.wsUri}?room=${room}`);
     this.webSocket.onopen = () => {
       this.emit({ sender: room, message: 'Connected' });
     };
